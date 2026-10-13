@@ -11,7 +11,7 @@ async function request(path, options = {}) {
   try {
     res = await fetch(`${BASE}${path}`, { ...options, headers });
   } catch {
-    throw new Error("Can't reach the backend. Is it still running in your terminal?");
+    throw new Error("Having trouble connecting. Please check your internet connection");
   }
   const body = await res.json().catch(() => ({}));
   if (!res.ok) {
