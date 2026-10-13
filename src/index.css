@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: dark; }
+body { @apply bg-night text-snow font-sans antialiased; }
+:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+::placeholder { color: rgba(255, 255, 255, 0.4); }
+
+/* Signature element 1: a record drawn like the logo's ring, spinning while a track plays. */
+.vinyl {
+  border: 3px solid #fff;
+  border-radius: 9999px;
+  background:
+    radial-gradient(circle at center, #fff 0 15%, #080808 16% 19%, transparent 20%),
+    conic-gradient(from 0deg, transparent 0 20%, rgba(255,255,255,.16) 25%, transparent 30% 70%, rgba(255,255,255,.16) 75%, transparent 80%),
+    repeating-radial-gradient(circle at center, #1c1c1c 0 2px, #0d0d0d 2px 4px);
+}
+@keyframes spin-record { to { transform: rotate(360deg); } }
+.vinyl-spin { animation: spin-record 4s linear infinite; }
+
+/* Signature element 2: the logo's three rising bars, animated as an equalizer. */
+.eq { display: inline-flex; align-items: flex-end; gap: 3px; height: 16px; }
+.eq span { width: 3px; border-radius: 2px; background: #fff; transform-origin: bottom; }
+.eq span:nth-child(1) { height: 40%; }
+.eq span:nth-child(2) { height: 70%; }
+.eq span:nth-child(3) { height: 100%; }
+@keyframes eq-bounce { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(.35); } }
+.eq-live span { animation: eq-bounce 0.9s ease-in-out infinite; }
+.eq-live span:nth-child(2) { animation-delay: .15s; }
+.eq-live span:nth-child(3) { animation-delay: .3s; }
+
+@media (prefers-reduced-motion: reduce) { .vinyl-spin, .eq-live span { animation: none; } }
